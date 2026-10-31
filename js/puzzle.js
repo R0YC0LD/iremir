@@ -172,6 +172,7 @@
       order = shuffle(rest, Math.random);
       order.forEach(function (id) { addSlot(id); });
       saved.forEach(function (id) { putOnBoard(id, true); });
+      (cfg.milestones || []).forEach(function (m, i) { if (placedCount / TOTAL >= m.at) shownMs[i] = 1; });
       applyFilter(); updateUI();
       if (placedCount === TOTAL) finish(true);
     }
@@ -256,13 +257,18 @@
     }
 
     /* ---------- yerleştirme / geri dönme ---------- */
+    var shownMs = {};
     function commit(id) {
-      var p = pieces[id];
+      var p = pieces[id], rc = boardRect(), tc = targetCenter(p, rc);
       putOnBoard(id, false);
       if (selectedId === id) selectedId = null;
       store(Object.keys(placed).map(Number));
       updateUI(); applyFilter();
+      document.dispatchEvent(new CustomEvent('puzzle:placed', { detail: { x: tc.x, y: tc.y, count: placedCount, total: TOTAL, last: placedCount === TOTAL } }));
       if (placedCount === TOTAL) finish(false);
+      else (cfg.milestones || []).forEach(function (m, i) {
+        if (!shownMs[i] && placedCount / TOTAL >= m.at) { shownMs[i] = 1; setTimeout(function () { toast(m.text); }, 450); }
+      });
     }
 
     function flyBack(g, p, fromT, s0, rect) {
@@ -469,7 +475,7 @@
     }
     function restart() {
       finishTimers.forEach(clearTimeout); finishTimers = [];
-      store(null); startGame(false);
+      store(null); shownMs = {}; startGame(false);
       toastQuiet();
     }
     function bind() {

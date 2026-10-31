@@ -227,7 +227,6 @@ body.is-ready .scroll-cue { opacity: 1; }
 .paper__body p { font-family: var(--serif); font-weight: 500; font-size: clamp(1.18rem, 2.2vw, 1.38rem); line-height: 1.72; color: var(--ink); margin-bottom: 1.25em; text-wrap: pretty; hyphens: auto; }
 .paper__body .w { opacity: 0; transition: opacity .55s var(--ease-soft); }
 .paper__body .w.on, .paper.is-static .paper__body .w { opacity: 1; }
-.paper__body p:first-child::first-letter { float: left; font-style: italic; font-weight: 400; font-size: 4.2em; line-height: .78; padding: .09em .1em 0 0; color: var(--wine); }
 .paper__closing { margin-top: 2rem; font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--ink-2); }
 .paper__sig { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.2rem, 5vw, 3rem); color: var(--wine); line-height: 1.2; margin-top: .2rem; }
 .paper__closing, .paper__sig, .paper__greeting, .paper__title { transition: opacity .8s var(--ease-soft); }

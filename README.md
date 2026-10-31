@@ -13,6 +13,8 @@ index.html            Sayfa iskeleti. Yazılar buradan değil config.js'ten geli
 css/style.css         Tüm tasarım (renkler en üstteki :root bloğunda).
 css/fonts.css         Yazı tipleri (assets/fonts içinden, internet gerekmez).
 js/config.js          ★ SENİN DOSYAN: tüm yazılar, fotoğraf listesi, müzik, tarih.
+js/effects.js         Ortam parçacıkları, kıvılcım/kalp efektleri, bölüm noktaları.
+css/v2.css            Sinematik efektlerin stilleri.
 js/main.js            Müzik, mektup animasyonu, galeri, lightbox, scroll efektleri.
 js/puzzle.js          56 parçalık yapboz motoru.
 assets/puzzle-photo.jpg   Yapboz fotoğrafı.
@@ -135,3 +137,7 @@ Kaydet, sayfayı yenile; hepsi güncellenir.
 - **Dokun-yerleştir:** Parçaya dokun (seçilir), sonra yapboz alanında yerleştirmek istediğin kareye dokun.
 - **Telefonda:** Parça şeridi yatay kayar. Parçayı **yukarı doğru sürükle** ya da parmağını parçanın üstünde **bir an basılı tut** ve sürükle.
 - **Kenarlar** düğmesi sadece kenar/köşe parçalarını gösterir. **Kılavuz** kesim çizgilerini, **Fotoğrafı göster** soluk bir önizlemeyi açar.
+
+## Açılış perdesi ve efektler
+
+`js/config.js` içinde `intro` (açılıştaki "E & İ" perdesi), `nav` (sağdaki bölüm noktaları) ve `puzzle.milestones` (yapboz ilerleme mesajları) bölümleri var. Perde istemezsen `intro.enabled: false` yap.

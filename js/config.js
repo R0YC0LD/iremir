@@ -29,6 +29,25 @@ window.SITE = {
     from: "Emir"       // gönderenin adı (imzalarda görünür)
   },
 
+  /* ---------- AÇILIŞ PERDESİ (sinematik giriş) ----------
+     Site açılırken kısa bir perde kalkar. monogram boş bırakılırsa
+     adların baş harflerinden otomatik üretilir (ör. "E & İ"). */
+  intro: {
+    enabled: true,
+    monogram: "",
+    caption: "Sadece senin için",
+    durationMs: 2800
+  },
+
+  /* ---------- SAĞDAKİ BÖLÜM NOKTALARI (masaüstü) ---------- */
+  nav: [
+    { id: "hero",    label: "Başlangıç" },
+    { id: "letter",  label: "Mektup" },
+    { id: "puzzle",  label: "Yapboz" },
+    { id: "gallery", label: "Anılar" },
+    { id: "closing", label: "Son söz" }
+  ],
+
   /* ---------- 0) KAPI (ilk açılış perdesi) ----------
      Tarayıcılar sesi kendiliğinden çaldırmaya izin vermez. Bu perde,
      müziği başlatmak için kullanıcıya nazik bir seçenek sunar.
@@ -86,7 +105,8 @@ window.SITE = {
     // Yazı animasyonu: kelimeler tek tek belirir.
     typewriter: true,
     wordDelayMs: 38,                    // ne kadar küçükse o kadar hızlı
-    skipLabel: "Hepsini göster"
+    skipLabel: "Hepsini göster",
+    nextCue: "Şimdi seninle bir yapboz çözelim"
   },
 
   /* ---------- 3) YAPBOZ ---------- */
@@ -99,6 +119,13 @@ window.SITE = {
     columns: 7,                         // sütun sayısı  (7 x 8 = 56 parça)
     rows: 8,                            // satır sayısı
     seed: 1907,                         // parça şekillerini değiştirmek istersen bu sayıyı değiştir
+    // Yapboz ilerledikçe çıkan küçük mesajlar (at: 0 ile 1 arası oran)
+    milestones: [
+      { at: 0.25, text: "Çeyreği tamam. Ellerine sağlık." },
+      { at: 0.5,  text: "Yarısı bitti, resim belirmeye başladı." },
+      { at: 0.75, text: "Az kaldı, hepsi yerine oturuyor." },
+      { at: 0.92, text: "Son birkaç parça…" }
+    ],
     // Arayüz yazıları
     labels: {
       progress: "{done} / {total} parça tamamlandı",

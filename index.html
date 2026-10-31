@@ -7,11 +7,22 @@
   <title>Sana bir şey anlatmak istedim</title>
   <meta name="description" content="Küçük bir köşe, sadece ikimiz için.">
   <!-- Yazılar js/config.js dosyasından gelir. Bu dosyayı değiştirmene gerek yok. -->
-  <link rel="stylesheet" href="css/fonts.css?v=3">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/fonts.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/v2.css?v=4">
 </head>
-<body class="is-loading">
+<body class="is-loading is-locked">
 
+  <div class="curtain" id="curtain" aria-hidden="true">
+    <div class="curtain__inner">
+      <span class="curtain__mono" id="curtainMono"></span>
+      <span class="curtain__rule"></span>
+      <span class="curtain__cap" id="curtainCap"></span>
+    </div>
+  </div>
+  <div class="cursor-glow" id="glow" aria-hidden="true"></div>
+  <nav class="dots" id="dots" aria-label="Bölümler"></nav>
+  <canvas class="fx" id="fx" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <div class="scroll-line" aria-hidden="true"><span></span></div>
 
@@ -47,6 +58,7 @@
 
     <!-- ============ 1) AÇILIŞ ============ -->
     <section class="hero" id="hero">
+      <canvas class="ambient" id="ambientHero" aria-hidden="true"></canvas>
       <div class="hero__inner">
         <div class="hero__text">
           <p class="eyebrow hero__kicker" data-c="hero.kicker"></p>
@@ -101,6 +113,8 @@
         </div>
       </div>
     </section>
+
+    <a class="next-cue" id="letterNext" href="#puzzle"><span id="letterNextText"></span><i aria-hidden="true"></i></a>
 
     <!-- ============ 3) YAPBOZ ============ -->
     <section class="section puzzle" id="puzzle">
@@ -182,6 +196,7 @@
 
     <!-- ============ 5) KAPANIŞ ============ -->
     <section class="section closing" id="closing">
+      <canvas class="ambient" id="ambientClosing" aria-hidden="true"></canvas>
       <header class="sec-head reveal">
         <span class="sec-head__num" data-c="closing.sectionNumber"></span>
         <span class="sec-head__rule"></span>
@@ -220,8 +235,9 @@
 
   <noscript><p style="padding:2rem;font-family:serif">Bu sayfanın çalışması için JavaScript gerekir.</p></noscript>
 
-  <script src="js/config.js?v=3"></script>
-  <script src="js/puzzle.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/config.js?v=4"></script>
+  <script src="js/puzzle.js?v=4"></script>
+  <script src="js/effects.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

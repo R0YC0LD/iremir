@@ -1,0 +1,109 @@
+/* =====================================================================
+   V2 — SİNEMATİK EFEKTLER (style.css'in üstüne biner)
+   ===================================================================== */
+
+/* ---------- açılış perdesi ---------- */
+.curtain { position: fixed; inset: 0; z-index: 190; display: grid; place-items: center; color: #f3e6d5; background: radial-gradient(90% 80% at 50% 45%, #5c1a28 0%, var(--wine-deep) 70%); transition: transform 1.6s cubic-bezier(.7, 0, .2, 1); will-change: transform; }
+.curtain.is-lift { transform: translate3d(0, -101%, 0); }
+.curtain__inner { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.curtain__mono { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(3.6rem, 16vw, 7.5rem); line-height: 1; letter-spacing: .02em; opacity: 0; filter: blur(10px); transform: scale(1.12); }
+.curtain__rule { display: block; height: 1px; width: 0; background: linear-gradient(90deg, transparent, #e8c9c0, transparent); }
+.curtain__cap { font-size: .7rem; letter-spacing: .4em; text-transform: uppercase; color: rgba(243, 230, 213, .7); opacity: 0; transform: translateY(8px); }
+.curtain.is-go .curtain__mono { animation: monoIn 1.7s var(--ease) .2s forwards; }
+.curtain.is-go .curtain__rule { animation: ruleIn 1.4s var(--ease) 1s forwards; }
+.curtain.is-go .curtain__cap { animation: gateIn 1.2s var(--ease) 1.4s forwards; }
+@keyframes monoIn { to { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes ruleIn { to { width: min(180px, 40vw); } }
+
+/* ---------- imleç ışığı ---------- */
+.cursor-glow { position: fixed; left: 0; top: 0; width: 320px; height: 320px; z-index: 60; pointer-events: none; border-radius: 50%; opacity: 0; transition: opacity .6s; background: radial-gradient(circle, rgba(226, 150, 150, .22) 0%, rgba(226, 150, 150, 0) 65%); mix-blend-mode: multiply; will-change: transform; }
+.cursor-glow.is-on { opacity: 1; }
+
+/* ---------- ortam tuvalleri ---------- */
+.ambient { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.hero__inner, .hero__year { position: relative; z-index: 1; }
+.fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 135; pointer-events: none; }
+
+/* ---------- bölüm noktaları ---------- */
+.dots { position: fixed; right: 22px; top: 50%; z-index: 110; display: grid; gap: 4px; transform: translate(14px, -50%); opacity: 0; pointer-events: none; transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.dots.is-show { opacity: 1; transform: translate(0, -50%); pointer-events: auto; }
+.dots__b { position: relative; display: flex; align-items: center; justify-content: flex-end; height: 26px; width: 26px; margin-left: auto; }
+.dots__b::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--wine); background: transparent; transition: transform .4s var(--ease), background .4s; }
+.dots__b.is-on::before { background: var(--wine); transform: scale(1.5); }
+.dots__b span { position: absolute; right: 30px; white-space: nowrap; font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--wine); opacity: 0; transform: translateX(8px); transition: opacity .35s, transform .45s var(--ease); pointer-events: none; }
+.dots__b:hover span, .dots__b:focus-visible span { opacity: 1; transform: none; }
+.dots.on-dark .dots__b::before { border-color: #efe3d2; }
+.dots.on-dark .dots__b.is-on::before { background: #efe3d2; }
+.dots.on-dark .dots__b span { color: #efe3d2; }
+@media (max-width: 1100px) { .dots { display: none; } }
+
+/* ---------- filigran rakamlar ---------- */
+.section[data-num]::before { content: attr(data-num); position: absolute; top: clamp(30px, 5vw, 70px); right: var(--gutter); z-index: 0; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(9rem, 28vw, 26rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(90, 22, 34, .09); pointer-events: none; user-select: none; }
+.closing[data-num]::before { -webkit-text-stroke-color: rgba(239, 227, 210, .08); }
+.section > * { position: relative; z-index: 1; }
+.closing > .ambient { position: absolute; z-index: 0; }
+
+/* ---------- süs çizgisi ---------- */
+.orn { display: grid; justify-items: center; margin: -40px auto clamp(36px, 6vw, 80px); }
+.orn svg { width: min(220px, 50vw); height: auto; overflow: visible; }
+.orn path { fill: none; stroke: var(--wine); stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.orn__l { stroke-dasharray: 60; stroke-dashoffset: 60; transition: stroke-dashoffset 1.6s var(--ease) .2s; opacity: .5; }
+.orn__h { stroke-dasharray: 130; stroke-dashoffset: 130; transition: stroke-dashoffset 2s var(--ease), fill .8s 1.6s; }
+.orn.is-in .orn__l { stroke-dashoffset: 0; }
+.orn.is-in .orn__h { stroke-dashoffset: 0; fill: rgba(123, 34, 51, .85); }
+
+/* ---------- hero ---------- */
+.hero::before { content: ""; position: absolute; top: -10%; right: -10%; width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(236, 190, 170, .45), transparent 65%); opacity: 0; transition: opacity 3s var(--ease) 1s; }
+body.is-ready .hero::before { opacity: 1; }
+.hero__title em { background: linear-gradient(100deg, var(--wine-2) 38%, #d98a8f 50%, var(--wine-2) 62%); background-size: 260% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+body.is-ready .hero__title em { animation: shimmer 3.2s var(--ease) 1.9s 1 both; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+.hero__arch { transform: perspective(900px) rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg)); transition: clip-path 1.8s var(--ease) .5s, transform .5s var(--ease); }
+
+/* ---------- mektup ---------- */
+.letter__stage { position: relative; }
+.letter__stage::before { content: ""; position: absolute; left: 50%; top: 50%; width: min(140vw, 1100px); aspect-ratio: 1; transform: translate(-50%, -50%) scale(.6); pointer-events: none; border-radius: 50%; background: radial-gradient(circle, rgba(240, 196, 170, .5), transparent 62%); opacity: 0; transition: opacity 2s var(--ease), transform 2.4s var(--ease); z-index: -1; }
+.letter:has(.paper-wrap.is-open) .letter__stage::before { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.next-cue { display: grid; justify-items: center; gap: 14px; width: max-content; max-width: 100%; margin: 0 auto; padding: 0 var(--gutter); text-decoration: none; text-align: center; font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--wine); opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); max-height: 0; overflow: hidden; }
+.next-cue i { width: 1px; height: 46px; background: linear-gradient(var(--wine), transparent); transform-origin: top; animation: cue2 2.2s var(--ease-soft) infinite; }
+@keyframes cue2 { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+.letter.is-read + .next-cue { opacity: 1; transform: none; pointer-events: auto; max-height: 200px; margin-bottom: clamp(-60px, -6vw, -20px); padding-bottom: 10px; }
+.paper__body p:first-child::first-letter { float: left; font-style: italic; font-weight: 400; font-size: 4.2em; line-height: .78; padding: .09em .1em 0 0; color: var(--wine); }
+
+/* ---------- yapboz ---------- */
+.board::after { content: ""; position: absolute; inset: 0; z-index: 6; pointer-events: none; clip-path: inset(0); background: linear-gradient(105deg, transparent 38%, rgba(255, 250, 240, .75) 50%, transparent 62%); transform: translateX(-110%); }
+.board.is-complete::after { animation: sheen 2.2s var(--ease) 1.3s 1 both; }
+@keyframes sheen { to { transform: translateX(110%); } }
+.board__note { font-size: 1.15rem; }
+.status__bar span { background: linear-gradient(90deg, var(--wine), #b4505f, var(--wine-2)); }
+
+/* ---------- galeri ---------- */
+.shot.reveal .shot__frame { clip-path: inset(0 0 100% 0); transition: clip-path 1.5s var(--ease) calc(var(--d, 0s) + .1s), transform .5s var(--ease), box-shadow .6s; }
+.shot.reveal.is-in .shot__frame { clip-path: inset(-20px -20px -20px -20px); }
+.shot.reveal img { transform: scale(1.22); transition: transform 2.2s var(--ease) calc(var(--d, 0s) + .1s), filter 1s; }
+.shot.reveal.is-in img { transform: scale(1.001); }
+.shot.reveal.is-in:hover img { transform: scale(1.045); }
+.shot__frame { will-change: transform; }
+.shot__frame::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .4s; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 244, 226, .38), transparent 55%); }
+.shot:hover .shot__frame::before { opacity: 1; }
+.shot::before { content: ""; position: absolute; z-index: 3; top: -12px; left: 50%; width: 84px; height: 24px; margin-left: -42px; transform: rotate(-3deg); background: rgba(232, 214, 180, .72); box-shadow: 0 1px 3px rgba(60, 30, 20, .18); pointer-events: none; opacity: 0; transition: opacity 1s var(--ease) 1.2s; }
+.shot:nth-child(even)::before { transform: rotate(4deg); }
+.shot.is-in::before { opacity: 1; }
+
+/* ---------- kapanış ---------- */
+.closing__name { clip-path: inset(0 100% 0 0); transition: clip-path 2.6s cubic-bezier(.5, 0, .2, 1) .5s; padding: 0 .2em; }
+.closing__sign.is-in .closing__name { clip-path: inset(0 -10% 0 0); }
+.closing__lines span:first-child { text-shadow: 0 0 40px rgba(217, 138, 143, .25); }
+.closing__lines span + span { text-shadow: 0 0 36px rgba(217, 138, 143, .35); }
+
+@media (max-width: 560px) {
+  .orn { margin-top: -30px; }
+  .section[data-num]::before { font-size: 9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .curtain, .cursor-glow, .fx { display: none; }
+  .shot.reveal .shot__frame { clip-path: none; }
+  .closing__name { clip-path: none; }
+  .orn__l, .orn__h { stroke-dashoffset: 0; }
+  .hero__title em { -webkit-text-fill-color: var(--wine-2); background: none; }
+}
