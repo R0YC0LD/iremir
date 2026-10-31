@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3ebde">
+  <title>Sana bir şey anlatmak istedim</title>
+  <meta name="description" content="Küçük bir köşe, sadece ikimiz için.">
+  <!-- Yazılar js/config.js dosyasından gelir. Bu dosyayı değiştirmene gerek yok. -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-line" aria-hidden="true"><span></span></div>
+
+  <!-- ============ KAPI / PERDE ============ -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" hidden>
+    <div class="gate__inner">
+      <p class="eyebrow" data-c="gate.kicker"></p>
+      <h1 class="gate__title" id="gateTitle" data-c="gate.title"></h1>
+      <span class="gate__rule" aria-hidden="true"></span>
+      <div class="gate__actions">
+        <button class="btn btn--solid" type="button" id="gateMusic"><span data-c="gate.withMusic"></span></button>
+        <button class="btn btn--ghost" type="button" id="gateSilent"><span data-c="gate.withoutMusic"></span></button>
+      </div>
+      <p class="gate__hint" data-c="gate.hint"></p>
+    </div>
+  </div>
+
+  <!-- ============ MÜZİK KONTROLÜ ============ -->
+  <div class="music" id="music">
+    <div class="music__vol">
+      <input type="range" id="musicVol" min="0" max="1" step="0.01" value="0.5">
+    </div>
+    <button class="music__btn" id="musicBtn" type="button" aria-pressed="false">
+      <span class="music__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="music__meta">
+        <b id="musicTitle"></b>
+        <small id="musicArtist"></small>
+      </span>
+    </button>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ 1) AÇILIŞ ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow hero__kicker" data-c="hero.kicker"></p>
+          <h2 class="hero__title" id="heroTitle" aria-label=""></h2>
+          <p class="hero__whisper" data-c="hero.whisper"></p>
+          <p class="hero__sub" data-c="hero.subtitle"></p>
+        </div>
+        <figure class="hero__photo" id="heroPhoto" data-parallax="0.06">
+          <div class="hero__arch"><img id="heroImg" alt="" decoding="async"></div>
+          <figcaption data-c="hero.photoCaption"></figcaption>
+        </figure>
+      </div>
+      <a class="scroll-cue" href="#letter" aria-label="Aşağı kaydır">
+        <span data-c="hero.scrollLabel"></span>
+        <i aria-hidden="true"></i>
+      </a>
+      <span class="hero__year" data-c="hero.year" aria-hidden="true"></span>
+    </section>
+
+    <!-- ============ 2) MEKTUP ============ -->
+    <section class="section letter" id="letter">
+      <header class="sec-head reveal">
+        <span class="sec-head__num" data-c="letter.sectionNumber"></span>
+        <span class="sec-head__rule"></span>
+        <span class="sec-head__label" data-c="letter.sectionLabel"></span>
+      </header>
+
+      <div class="letter__stage reveal">
+        <div class="env-wrap" id="envWrap">
+          <div class="env-wrap__inner">
+            <button class="envelope" id="envelope" type="button" aria-expanded="false" aria-controls="paper">
+              <span class="envelope__back"></span>
+              <span class="envelope__flap"></span>
+              <span class="envelope__front"></span>
+              <span class="envelope__seal"><b id="sealLetter"></b></span>
+              <span class="envelope__hint" data-c="letter.envelopeHint"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="paper-wrap" id="paperWrap">
+          <div class="paper-wrap__inner">
+            <article class="paper" id="paper">
+              <h3 class="paper__title" data-c="letter.title"></h3>
+              <p class="paper__greeting" id="letterGreeting"></p>
+              <div class="paper__body" id="letterBody"></div>
+              <p class="paper__closing" id="letterClosing"></p>
+              <p class="paper__sig" id="letterSig"></p>
+              <button class="paper__skip" id="letterSkip" type="button"></button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3) YAPBOZ ============ -->
+    <section class="section puzzle" id="puzzle">
+      <header class="sec-head reveal">
+        <span class="sec-head__num" data-c="puzzle.sectionNumber"></span>
+        <span class="sec-head__rule"></span>
+        <span class="sec-head__label" data-c="puzzle.sectionLabel"></span>
+      </header>
+
+      <div class="puzzle__head reveal">
+        <h2 class="display" id="puzzleTitle"></h2>
+        <p class="lede" data-c="puzzle.intro"></p>
+      </div>
+
+      <div class="puzzle__status reveal">
+        <div class="status__count"><span class="status__num" id="pzNum">0</span><span class="status__label" id="pzLabel"></span></div>
+        <div class="status__bar" role="progressbar" aria-valuemin="0" aria-valuemax="120" aria-valuenow="0" id="pzBar"><span id="pzFill"></span></div>
+        <div class="status__tools">
+          <button class="chip" id="pzGuide" type="button" aria-pressed="true"></button>
+          <button class="chip" id="pzPreview" type="button" aria-pressed="false"></button>
+          <button class="chip" id="pzShuffle" type="button"></button>
+          <button class="chip chip--warn" id="pzRestart" type="button"></button>
+        </div>
+      </div>
+
+      <div class="puzzle__layout reveal" id="pzLayout">
+        <div class="board-wrap">
+          <div class="board" id="pzBoard" aria-label="Yapboz alanı">
+            <img class="board__ghost" id="pzGhost" alt="" aria-hidden="true">
+            <svg class="board__guide" id="pzGuideSvg" aria-hidden="true" preserveAspectRatio="none"></svg>
+            <div class="board__cell" id="pzCell" aria-hidden="true"></div>
+            <div class="board__pieces" id="pzPlaced"></div>
+            <img class="board__final" id="pzFinal" alt="" aria-hidden="true">
+          </div>
+          <p class="board__note" id="pzToast" role="status" aria-live="polite"></p>
+        </div>
+
+        <aside class="tray" id="pzTrayWrap">
+          <div class="tray__head">
+            <div>
+              <h3 data-c="puzzle.labels.trayTitle"></h3>
+              <p data-c="puzzle.labels.trayHint"></p>
+            </div>
+            <div class="seg" role="group">
+              <button type="button" class="seg__btn is-on" id="pzAll" data-c="puzzle.labels.allPieces"></button>
+              <button type="button" class="seg__btn" id="pzEdges" data-c="puzzle.labels.edges"></button>
+            </div>
+          </div>
+          <div class="tray__scroll" id="pzTray" tabindex="0" aria-label="Parça alanı"></div>
+        </aside>
+
+        <div class="finale" id="pzFinale" aria-live="polite">
+          <p class="eyebrow" data-c="puzzle.completion.kicker"></p>
+          <h3 class="finale__title" data-c="puzzle.completion.title"></h3>
+          <span class="gate__rule" aria-hidden="true"></span>
+          <p class="finale__text" data-c="puzzle.completion.text"></p>
+          <div class="finale__actions">
+            <a class="btn btn--solid" href="#gallery"><span data-c="puzzle.completion.button"></span></a>
+            <button class="btn btn--ghost" type="button" id="pzReplay"><span data-c="puzzle.completion.replay"></span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4) GALERİ ============ -->
+    <section class="section gallery" id="gallery">
+      <header class="sec-head reveal">
+        <span class="sec-head__num" data-c="gallery.sectionNumber"></span>
+        <span class="sec-head__rule"></span>
+        <span class="sec-head__label" data-c="gallery.sectionLabel"></span>
+      </header>
+      <div class="gallery__head reveal">
+        <h2 class="display" id="galleryTitle"></h2>
+        <p class="lede" data-c="gallery.intro"></p>
+      </div>
+      <div class="gallery__grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- ============ 5) KAPANIŞ ============ -->
+    <section class="section closing" id="closing">
+      <header class="sec-head reveal">
+        <span class="sec-head__num" data-c="closing.sectionNumber"></span>
+        <span class="sec-head__rule"></span>
+        <span class="sec-head__label" data-c="closing.sectionLabel"></span>
+      </header>
+      <div class="closing__inner">
+        <p class="closing__lines reveal" id="closingLines"></p>
+        <p class="closing__text reveal" data-c="closing.text"></p>
+        <div class="closing__sign reveal">
+          <span class="closing__signoff" data-c="closing.signoff"></span>
+          <span class="closing__name" id="closingName"></span>
+          <time class="closing__date" id="closingDate"></time>
+        </div>
+        <a class="to-top reveal" href="#top"><span data-c="closing.backToTop"></span><i aria-hidden="true"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotoğraf" hidden>
+    <div class="lightbox__backdrop" data-close></div>
+    <button class="lb-btn lb-close" type="button" data-close aria-label="Kapat"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label="Önceki"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button>
+    <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Sonraki"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>
+    <figure class="lightbox__fig" id="lbFig">
+      <img id="lbImg" alt="" decoding="async">
+      <figcaption>
+        <span class="lightbox__count" id="lbCount"></span>
+        <span class="lightbox__cap" id="lbCap"></span>
+        <span class="lightbox__date" id="lbDate"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <canvas class="petals" id="petals" aria-hidden="true"></canvas>
+
+  <noscript><p style="padding:2rem;font-family:serif">Bu sayfanın çalışması için JavaScript gerekir.</p></noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/puzzle.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
