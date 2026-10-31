@@ -288,7 +288,7 @@ body.is-ready .scroll-cue { opacity: 1; }
 .piece--ghost.is-lift { transition: transform .16s var(--ease); }
 
 /* parça alanı */
-.tray { --slot: 114px; position: relative; display: grid; grid-template-rows: auto 1fr; height: calc(var(--bw) / var(--ar)); min-height: 0; background: linear-gradient(180deg, var(--paper-2), #e6d9c3); border: 1px solid var(--line); box-shadow: inset 0 2px 14px rgba(70, 40, 30, .1); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.tray { --slot: 122px; position: relative; display: grid; grid-template-rows: auto 1fr; height: calc(var(--bw) / var(--ar)); min-height: 0; background: linear-gradient(180deg, var(--paper-2), #e6d9c3); border: 1px solid var(--line); box-shadow: inset 0 2px 14px rgba(70, 40, 30, .1); transition: opacity .9s var(--ease), transform .9s var(--ease); }
 .tray__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); background: rgba(250, 245, 234, .5); }
 .tray__head h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; line-height: 1.1; }
 .tray__head p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
@@ -396,8 +396,9 @@ body.is-dragging, body.is-dragging * { cursor: grabbing !important; }
   .board__note { position: absolute; left: 0; right: 0; bottom: -38px; margin: 0; min-height: 0; text-align: center; font-size: 1rem; pointer-events: none; }
   .puzzle__layout .board-wrap { grid-row: 1; }
   .puzzle__layout .finale { grid-column: 1; grid-row: 2; justify-items: center; text-align: center; padding: 0; }
-  .tray { --slot: 100px; width: 100%; height: auto; }
-  .tray__scroll { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-template-rows: var(--slot); grid-auto-columns: var(--slot); justify-items: center; overflow-x: auto; overflow-y: hidden; padding: 10px 12px 14px; }
+  .tray { --slot: 118px; width: 100%; height: auto; position: sticky; bottom: 8px; z-index: 40; background: rgba(236, 224, 205, .94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 -14px 34px -16px rgba(60, 25, 20, .45), inset 0 1px 0 rgba(255, 255, 255, .5); }
+  .tray__head { display: none; }
+  .tray__scroll { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-template-rows: var(--slot); grid-auto-columns: var(--slot); justify-items: center; overflow-x: auto; overflow-y: hidden; padding: 8px 12px 10px; }
   .tray .piece { touch-action: pan-x; }
   .tray .piece.is-selected { transform: scale(1.12); }
   .puzzle__status { grid-template-columns: 1fr; gap: 14px; }
@@ -406,7 +407,7 @@ body.is-dragging, body.is-dragging * { cursor: grabbing !important; }
   .status__tools { justify-content: flex-start; }
 }
 @supports (height: 100svh) {
-  @media (max-width: 960px) { .puzzle__layout { --bw: min(100%, calc((100svh - 300px) * var(--ar)), 460px); } }
+  @media (max-width: 960px) { .puzzle__layout { --bw: min(100%, calc((100svh - 250px) * var(--ar)), 460px); } }
 }
 @media (max-width: 860px) {
   .hero { align-items: start; padding-top: clamp(40px, 9vw, 70px); }

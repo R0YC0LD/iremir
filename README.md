@@ -2,7 +2,7 @@
 
 Tek sayfalık, tamamen statik (HTML + CSS + Vanilla JS) bir site. Sunucu, veritabanı, npm veya build gerektirmez. GitHub Pages'te doğrudan çalışır.
 
-Bölümler: **Kapı (müzik seçeneği) → Açılış → Mektup → 56 parçalık yapboz → Fotoğraf galerisi → Kapanış**
+Bölümler: **Kapı (müzik seçeneği) → Açılış → Mektup → 30 parçalık yapboz → Fotoğraf galerisi → Kapanış**
 
 ---
 
@@ -16,7 +16,7 @@ js/config.js          ★ SENİN DOSYAN: tüm yazılar, fotoğraf listesi, müzi
 js/effects.js         Ortam parçacıkları, kıvılcım/kalp efektleri, bölüm noktaları.
 css/v2.css            Sinematik efektlerin stilleri.
 js/main.js            Müzik, mektup animasyonu, galeri, lightbox, scroll efektleri.
-js/puzzle.js          56 parçalık yapboz motoru.
+js/puzzle.js          30 parçalık yapboz motoru.
 assets/puzzle-photo.jpg   Yapboz fotoğrafı.
 assets/music.mp3          Arka plan müziği.
 assets/photos/            Galeri fotoğrafları.
@@ -60,7 +60,7 @@ Başka bir şey gerekmez. Fotoğraflar kendi oranını korur, düzen otomatik ay
 
 1. Yeni fotoğrafı **`assets/puzzle-photo.jpg`** adıyla üzerine yaz (dikey 3:4 oran en iyisidir; oran bozulmaz, parçalar fotoğrafa göre otomatik üretilir).
 2. Farklı bir ad kullanacaksan `js/config.js` → `puzzle.image` satırını güncelle.
-3. Parça şekillerini değiştirmek istersen `puzzle.seed` sayısını değiştir. Parça sayısı `puzzle.columns` x `puzzle.rows` (7 x 8 = 56).
+3. Parça şekillerini değiştirmek istersen `puzzle.seed` sayısını değiştir. Parça sayısı `puzzle.columns` x `puzzle.rows` (5 x 6 = 30).
 
 Tarayıcı ilerlemeyi hatırlar. Yeni fotoğraf koyduktan sonra "Baştan başla" butonuna bas ya da `seed` değiştir.
 

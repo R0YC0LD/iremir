@@ -1,5 +1,5 @@
 /* =====================================================================
-   YAPBOZ MOTORU  (120 parça = 10 sütun x 12 satır)
+   YAPBOZ MOTORU  (varsayılan 5 sütun x 6 satır = 30 parça; config.js'ten değişir)
    ---------------------------------------------------------------------
    Burayı değiştirmen gerekmiyor. Fotoğraf, parça sayısı ve yazılar
    js/config.js içindeki "puzzle" bölümünden ayarlanır.

@@ -114,10 +114,10 @@ window.SITE = {
     sectionNumber: "II",
     sectionLabel: "Yapboz",
     title: "Dağılan parçaları *birlikte* toplayalım",
-    intro: "56 küçük parça. Her biri bir anının köşesi. Parçayı sürükleyip doğru yerine bırak; ya da dokun, sonra yerleştirmek istediğin yere dokun.",
+    intro: "30 büyük parça. Her biri bir anının köşesi. Parçayı sürükleyip doğru yerine bırak; ya da dokun, sonra yerleştirmek istediğin yere dokun.",
     image: "assets/puzzle-photo.jpg",   // yapboz fotoğrafı (3:4 dikey önerilir)
-    columns: 7,                         // sütun sayısı  (7 x 8 = 56 parça)
-    rows: 8,                            // satır sayısı
+    columns: 5,                         // sütun sayısı  (5 x 6 = 30 parça)
+    rows: 6,                            // satır sayısı
     seed: 1907,                         // parça şekillerini değiştirmek istersen bu sayıyı değiştir
     // Yapboz ilerledikçe çıkan küçük mesajlar (at: 0 ile 1 arası oran)
     milestones: [
