@@ -360,7 +360,10 @@
     function scrollLoop() {
       if (!drag) return;
       var y = drag.py, vh = window.innerHeight, v = 0;
-      if (y < 70) v = -Math.ceil((70 - y) / 5); else if (y > vh - 70) v = Math.ceil((y - (vh - 70)) / 5);
+      // kenar kaydırma ancak parmak/fare kenar bölgesinden uzaklaştıktan sonra devreye girer
+      // (alttaki parça şeridinden sürüklemeye başlayınca sayfa kaymasın)
+      if (y > 130) drag.armTop = true; if (y < vh - 130) drag.armBottom = true;
+      if (y < 70 && drag.armTop) v = -Math.ceil((70 - y) / 5); else if (y > vh - 70 && drag.armBottom) v = Math.ceil((y - (vh - 70)) / 5);
       if (v) { window.scrollBy(0, v); if (!drag.raf) drag.raf = requestAnimationFrame(frame); }
       requestAnimationFrame(scrollLoop);
     }
