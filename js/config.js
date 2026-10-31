@@ -112,6 +112,7 @@ window.SITE = {
       guide: "Kılavuz",
       preview: "Fotoğrafı göster",
       wrong: "Burası değil, bir daha dene",
+      selectHint: "Şimdi tahtada yerine dokun",
       placed: "Yerine oturdu"
     },
     // Yapboz bittiğinde çıkan mesaj

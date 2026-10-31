@@ -206,6 +206,7 @@
       barEl.setAttribute('aria-valuenow', placedCount); barEl.setAttribute('aria-valuemax', TOTAL);
       barEl.setAttribute('aria-valuetext', L.progress.replace('{done}', placedCount).replace('{total}', TOTAL));
       fillEl.style.transform = 'scaleX(' + (placedCount / TOTAL) + ')';
+      $('pzBadge').textContent = placedCount + ' / ' + TOTAL;
     }
 
     function toast(msg) {
@@ -295,7 +296,7 @@
       else {
         // parmağı bir an basılı tutmak da sürüklemeyi başlatır (parça alanı kayarken bile)
         var pr = press;
-        pr.timer = setTimeout(function () { if (press === pr && !drag) startDrag({ clientX: pr.x, clientY: pr.y }); }, 230);
+        pr.timer = setTimeout(function () { if (press === pr && !drag) startDrag({ clientX: pr.x, clientY: pr.y }); }, 160);
       }
       window.addEventListener('pointermove', onMove, { passive: false });
       window.addEventListener('pointerup', onUp);
@@ -306,8 +307,8 @@
       if (press && e.pointerId === press.pid && !drag) {
         var dx = e.clientX - press.x, dy = e.clientY - press.y, dist = Math.hypot(dx, dy);
         if (press.type === 'touch' || press.type === 'pen') {
-          if (dist < 7) return;
-          var vertical = Math.abs(dy) > Math.abs(dx) * 1.05;
+          if (dist < 6) return;
+          var vertical = Math.abs(dy) > Math.abs(dx) * 0.8;
           var wantDrag = stackedLayout() ? vertical : !vertical;
           if (!wantDrag) { endPress(); return; }   // tarayıcı kaydırıyor
         } else if (dist < 4) return;
@@ -328,7 +329,7 @@
       var g = makeGhost(p, gw);
       var s0 = tr.width / gw;
       var lift = press.type === 'touch' ? -(gh * 0.42 + 14) : 0;
-      drag = { id: p.id, p: p, g: g, pid: press.pid, gw: gw, gh: gh, lift: lift, px: e.clientX, py: e.clientY, raf: 0, s0: s0, last: null, cell: null };
+      drag = { touch: press.type !== 'mouse', id: p.id, p: p, g: g, pid: press.pid, gw: gw, gh: gh, lift: lift, px: e.clientX, py: e.clientY, raf: 0, s0: s0, last: null, cell: null };
       var from = tf(tr.left + tr.width / 2 - gw / 2, tr.top + tr.height / 2 - gh / 2, s0);
       g.style.transform = from; void g.offsetWidth;
       g.classList.add('is-lift');
@@ -391,7 +392,8 @@
       var cur = tf(cx - d.gw / 2, cy - d.gh / 2, 1);
       var cell = cellAt(cx, cy, rect);
       var u = (cx - rect.left) / rect.width * W, v = (cy - rect.top) / rect.height * H;
-      var ok = x !== null && Math.abs(u - (p.c + 0.5) * cw) < 0.6 * cw && Math.abs(v - (p.r + 0.5) * ch) < 0.6 * ch;
+      var tol = d.touch ? 0.85 : 0.6;
+      var ok = x !== null && Math.abs(u - (p.c + 0.5) * cw) < tol * cw && Math.abs(v - (p.r + 0.5) * ch) < tol * ch;
       if (ok) { flyIn(d.g, p, cur, rect); toastQuiet(); }
       else {
         if (cell && x !== null) { showCell(cell, true); toast(L.wrong); }
@@ -410,6 +412,7 @@
       deselect(); selectedId = id;
       pieces[id].el.classList.add('is-selected');
       board.classList.add('has-selection');
+      toast(L.selectHint);
     }
     function onBoardClick(e) {
       if (selectedId === null || finished) return;
