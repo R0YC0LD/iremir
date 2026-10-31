@@ -93,17 +93,34 @@
         if (k < 1) fadeRaf = requestAnimationFrame(step); else if (done) done();
       })(t0);
     }
+    var pending = false;
     function play() {
-      var p = audio.play();
-      var ok = function () { playing = true; paint(); fade(target, 1600); };
-      if (p && p.then) p.then(ok).catch(function () { playing = false; paint(); }); else ok();
+      if (playing) return Promise.resolve(true);
+      if (pending) return Promise.resolve(false);
+      pending = true;
+      var ok = function () { pending = false; playing = true; paint(); fade(target, 2200); return true; };
+      var no = function () { pending = false; playing = false; paint(); return false; };
+      var p; try { p = audio.play(); } catch (e) { return Promise.resolve(no()); }
+      return p && p.then ? p.then(ok, no) : Promise.resolve(ok());
     }
     function pause() { playing = false; paint(); fade(0, 600, function () { audio.pause(); }); }
-    btn.addEventListener('click', function () { playing ? pause() : play(); });
+    var armed = false, evs = ['wheel', 'touchmove', 'touchend', 'pointerdown', 'keydown', 'click', 'scroll'];
+    function onFirst() {
+      if (!armed) return;
+      play().then(function (ok) { if (ok) disarm(); });
+    }
+    function disarm() { armed = false; evs.forEach(function (n) { window.removeEventListener(n, onFirst, true); }); }
+    function arm() { if (armed) return; armed = true; evs.forEach(function (n) { window.addEventListener(n, onFirst, { capture: true, passive: true }); }); }
+    btn.addEventListener('click', function (e) { disarm(); e.stopPropagation(); playing ? pause() : play(); });
+    function hint() {
+      if (playing) return;
+      root.classList.add('is-hint'); $('musicArtist').textContent = m.hint || '';
+      setTimeout(function () { root.classList.remove('is-hint'); $('musicArtist').textContent = m.artist; }, 7000);
+    }
     vol.addEventListener('input', function () { target = +vol.value; cancelAnimationFrame(fadeRaf); audio.volume = target; });
     audio.addEventListener('error', function () { root.hidden = true; });
     paint();
-    return { play: play, pause: pause };
+    return { play: play, pause: pause, arm: arm, hint: hint };
   })();
 
   if (CFG.gate && CFG.gate.enabled) {
@@ -112,6 +129,10 @@
     $('gateSilent').addEventListener('click', function () { closeGate(false); });
   } else {
     fontsReady.then(function () { requestAnimationFrame(goReady); });
+    if (CFG.music.startOnFirstInteraction !== false) {
+      music.arm();
+      setTimeout(music.hint, 3500);
+    }
   }
 
   /* ---------- 2) mektup ---------- */

@@ -2,7 +2,7 @@
 
 Tek sayfalık, tamamen statik (HTML + CSS + Vanilla JS) bir site. Sunucu, veritabanı, npm veya build gerektirmez. GitHub Pages'te doğrudan çalışır.
 
-Bölümler: **Kapı (müzik seçeneği) → Açılış → Mektup → 120 parçalık yapboz → Fotoğraf galerisi → Kapanış**
+Bölümler: **Kapı (müzik seçeneği) → Açılış → Mektup → 56 parçalık yapboz → Fotoğraf galerisi → Kapanış**
 
 ---
 
@@ -14,7 +14,7 @@ css/style.css         Tüm tasarım (renkler en üstteki :root bloğunda).
 css/fonts.css         Yazı tipleri (assets/fonts içinden, internet gerekmez).
 js/config.js          ★ SENİN DOSYAN: tüm yazılar, fotoğraf listesi, müzik, tarih.
 js/main.js            Müzik, mektup animasyonu, galeri, lightbox, scroll efektleri.
-js/puzzle.js          120 parçalık yapboz motoru.
+js/puzzle.js          56 parçalık yapboz motoru.
 assets/puzzle-photo.jpg   Yapboz fotoğrafı.
 assets/music.mp3          Arka plan müziği.
 assets/photos/            Galeri fotoğrafları.
@@ -58,7 +58,7 @@ Başka bir şey gerekmez. Fotoğraflar kendi oranını korur, düzen otomatik ay
 
 1. Yeni fotoğrafı **`assets/puzzle-photo.jpg`** adıyla üzerine yaz (dikey 3:4 oran en iyisidir; oran bozulmaz, parçalar fotoğrafa göre otomatik üretilir).
 2. Farklı bir ad kullanacaksan `js/config.js` → `puzzle.image` satırını güncelle.
-3. Parça şekillerini değiştirmek istersen `puzzle.seed` sayısını değiştir. Parça sayısı `puzzle.columns` x `puzzle.rows` (10 x 12 = 120).
+3. Parça şekillerini değiştirmek istersen `puzzle.seed` sayısını değiştir. Parça sayısı `puzzle.columns` x `puzzle.rows` (7 x 8 = 56).
 
 Tarayıcı ilerlemeyi hatırlar. Yeni fotoğraf koyduktan sonra "Baştan başla" butonuna bas ya da `seed` değiştir.
 
@@ -67,7 +67,7 @@ Tarayıcı ilerlemeyi hatırlar. Yeni fotoğraf koyduktan sonra "Baştan başla"
 1. Yeni `.mp3` dosyasını **`assets/music.mp3`** olarak kaydet (ya da başka bir adla `assets/` içine koy).
 2. `js/config.js` → `music.file`, `music.title`, `music.artist` alanlarını güncelle.
 
-Müzik, tarayıcı kuralları gereği kendiliğinden başlamaz: açılışta "Müzikle gir / Sessiz devam et" seçeneği çıkar; sağ alttaki düğmeden her zaman açılıp kapanır, ses ayarı yapılabilir (iPhone ses ayarını sistem tuşlarından yapar). Perdeyi hiç istemezsen `gate.enabled: false` yap.
+Müzik ilk kaydırma/dokunuşta kendiliğinden başlar (tarayıcılar hiç etkileşim olmadan ses çaldırmaz; bazı tarayıcılarda ilk dokunuş ya da tıklama gerekebilir). Sağ alttaki düğmeden her zaman açılıp kapanır, ses ayarı yapılabilir (iPhone ses ayarını sistem tuşlarından yapar). Açılış perdesini geri istersen `gate.enabled: true` yap.
 
 ---
 

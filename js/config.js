@@ -25,8 +25,8 @@ window.SITE = {
 
   /* ---------- KİMDEN KİME ---------- */
   names: {
-    to:   "Sevgilim",   // alıcının adı (mektupta "Sevgili ..." diye geçer)
-    from: "Ben"         // senin adın (imzalarda görünür)
+    to:   "İrem",       // alıcının adı
+    from: "Emir"       // gönderenin adı (imzalarda görünür)
   },
 
   /* ---------- 0) KAPI (ilk açılış perdesi) ----------
@@ -35,7 +35,7 @@ window.SITE = {
      enabled: false yaparsan perde hiç çıkmaz (müzik sağ alttaki
      düğmeden elle açılır). */
   gate: {
-    enabled: true,
+    enabled: false,   // false = perde yok, site doğrudan açılır
     kicker: "Sadece senin için",
     title: "Bir şey hazırladım",
     withMusic: "Müzikle gir",
@@ -45,7 +45,7 @@ window.SITE = {
 
   /* ---------- 1) AÇILIŞ EKRANI ---------- */
   hero: {
-    kicker: "Bir özür, bir anı defteri",
+    kicker: "Emir'den İrem'e",
     // Başlık satırları. Her satır sırayla belirir.
     // *Yıldızlı* kelimeler italik ve bordo olur.
     titleLines: [
@@ -58,7 +58,7 @@ window.SITE = {
     scrollLabel: "Aşağı kaydır",
     // Açılıştaki çerçeveli fotoğraf. Boş bırakırsan ("") fotoğraf görünmez.
     photo: "assets/photos/foto-03.jpg",
-    photoAlt: "İkimiz",
+    photoAlt: "İrem ve Emir",
     photoCaption: "Fotoğraf No. 01",
     year: "2026"
   },
@@ -94,10 +94,10 @@ window.SITE = {
     sectionNumber: "II",
     sectionLabel: "Yapboz",
     title: "Dağılan parçaları *birlikte* toplayalım",
-    intro: "120 küçük parça. Her biri bir anının köşesi. Parçayı sürükleyip doğru yerine bırak; ya da dokun, sonra yerleştirmek istediğin yere dokun.",
+    intro: "56 küçük parça. Her biri bir anının köşesi. Parçayı sürükleyip doğru yerine bırak; ya da dokun, sonra yerleştirmek istediğin yere dokun.",
     image: "assets/puzzle-photo.jpg",   // yapboz fotoğrafı (3:4 dikey önerilir)
-    columns: 10,                        // sütun sayısı  (10 x 12 = 120 parça)
-    rows: 12,                           // satır sayısı
+    columns: 7,                         // sütun sayısı  (7 x 8 = 56 parça)
+    rows: 8,                            // satır sayısı
     seed: 1907,                         // parça şekillerini değiştirmek istersen bu sayıyı değiştir
     // Arayüz yazıları
     labels: {
@@ -163,6 +163,10 @@ window.SITE = {
     title: "Sen Benim Şarkılarımsın",
     artist: "Cem Adrian & Hande Mehan",
     volume: 0.5,                        // 0 ile 1 arası başlangıç ses seviyesi
+    // true: kullanıcı sayfada ilk kez kaydırınca / dokununca müzik kendiliğinden başlar.
+    // (Tarayıcılar sesi hiçbir etkileşim olmadan çaldırmaya izin vermez.)
+    startOnFirstInteraction: true,
+    hint: "Müzik için dokun",
     labelOn: "Müziği kapat",
     labelOff: "Müziği aç",
     labelVolume: "Ses seviyesi"

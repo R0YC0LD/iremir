@@ -140,7 +140,7 @@ body.is-ready .music { opacity: 1; transform: none; }
 .music__meta { display: grid; text-align: left; line-height: 1.15; max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .6s var(--ease), opacity .4s; }
 .music__meta b { font-family: var(--serif); font-weight: 500; font-size: .98rem; }
 .music__meta small { font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
-.music.is-playing .music__meta, .music__btn:hover .music__meta, .music__btn:focus-visible .music__meta { max-width: 190px; opacity: 1; }
+.music.is-hint .music__meta, .music.is-playing .music__meta, .music__btn:hover .music__meta, .music__btn:focus-visible .music__meta { max-width: 190px; opacity: 1; }
 .music__eq { display: flex; align-items: flex-end; gap: 3px; height: 16px; }
 .music__eq i { display: block; width: 2px; height: 5px; background: currentColor; border-radius: 1px; transform-origin: 50% 100%; transition: height .4s; }
 .music.is-playing .music__eq i { animation: eq 1.1s ease-in-out infinite; }
@@ -227,6 +227,7 @@ body.is-ready .scroll-cue { opacity: 1; }
 .paper__body p { font-family: var(--serif); font-weight: 500; font-size: clamp(1.18rem, 2.2vw, 1.38rem); line-height: 1.72; color: var(--ink); margin-bottom: 1.25em; text-wrap: pretty; hyphens: auto; }
 .paper__body .w { opacity: 0; transition: opacity .55s var(--ease-soft); }
 .paper__body .w.on, .paper.is-static .paper__body .w { opacity: 1; }
+.paper__body p:first-child::first-letter { float: left; font-style: italic; font-weight: 400; font-size: 4.2em; line-height: .78; padding: .09em .1em 0 0; color: var(--wine); }
 .paper__closing { margin-top: 2rem; font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--ink-2); }
 .paper__sig { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.2rem, 5vw, 3rem); color: var(--wine); line-height: 1.2; margin-top: .2rem; }
 .paper__closing, .paper__sig, .paper__greeting, .paper__title { transition: opacity .8s var(--ease-soft); }
@@ -286,7 +287,7 @@ body.is-ready .scroll-cue { opacity: 1; }
 .piece--ghost.is-lift { transition: transform .16s var(--ease); }
 
 /* parça alanı */
-.tray { --slot: 98px; position: relative; display: grid; grid-template-rows: auto 1fr; height: calc(var(--bw) / var(--ar)); min-height: 0; background: linear-gradient(180deg, var(--paper-2), #e6d9c3); border: 1px solid var(--line); box-shadow: inset 0 2px 14px rgba(70, 40, 30, .1); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.tray { --slot: 114px; position: relative; display: grid; grid-template-rows: auto 1fr; height: calc(var(--bw) / var(--ar)); min-height: 0; background: linear-gradient(180deg, var(--paper-2), #e6d9c3); border: 1px solid var(--line); box-shadow: inset 0 2px 14px rgba(70, 40, 30, .1); transition: opacity .9s var(--ease), transform .9s var(--ease); }
 .tray__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); background: rgba(250, 245, 234, .5); }
 .tray__head h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; line-height: 1.1; }
 .tray__head p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
@@ -394,7 +395,7 @@ body.is-dragging, body.is-dragging * { cursor: grabbing !important; }
   .board__note { position: absolute; left: 0; right: 0; bottom: -38px; margin: 0; min-height: 0; text-align: center; font-size: 1rem; pointer-events: none; }
   .puzzle__layout .board-wrap { grid-row: 1; }
   .puzzle__layout .finale { grid-column: 1; grid-row: 2; justify-items: center; text-align: center; padding: 0; }
-  .tray { --slot: 84px; width: 100%; height: auto; }
+  .tray { --slot: 92px; width: 100%; height: auto; }
   .tray__scroll { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-template-rows: repeat(2, var(--slot)); grid-auto-columns: var(--slot); justify-items: center; overflow-x: auto; overflow-y: hidden; padding: 10px 12px 14px; }
   .tray .piece { touch-action: pan-x; }
   .tray .piece.is-selected { transform: scale(1.12); }
